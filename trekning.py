@@ -1,7 +1,6 @@
-from random import randint
 from time import sleep
 from math import exp as e
-import string
+import string, random
 
 def read_file(filename):
     f = open(filename, "r")
@@ -18,23 +17,24 @@ def print_message(message, spaces=40, linebreaks=15):
     print prefix, message, postfix
 
 
-def perform_draw(names, num_winners=1, num_iterations=32, print_multiplier=1):
+def perform_draw(names, num_winners=1, num_iterations=32):
     for i in range(1,num_iterations):
         clear_screen() 
 
         delay = e(i/float(num_iterations))-1.5
         if delay < 0: delay = 0.1
-        
-        candidates = [names[randint(0, len(names)-1)]*print_multiplier for i in range(num_winners)]
+
+        candidates = random.sample(names, num_winners)
+
         print_message(", ".join(candidates))
 
         sleep(delay)
 
     
     clear_screen() 
-    sleep(3)
+    sleep(2.5)
     
-    winners = [names[randint(0, len(names)-1)]*print_multiplier for i in range(num_winners)]
+    winners = random.sample(names, num_winners)
     
     if num_winners > 1: title = "Vinnerne" 
     else: title = "Vinneren"
@@ -49,5 +49,5 @@ if __name__ == '__main__':
 
     num_winners = input("Hvor mange vinnere skal jeg trekke? ")
 
-    perform_draw(names, num_winners=num_winners, print_multiplier=5)
+    perform_draw(names, num_winners)
 
