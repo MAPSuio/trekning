@@ -3,6 +3,12 @@ from time import sleep
 from math import exp as e
 import string
 
+def read_file(filename):
+    f = open(filename, "r")
+    names = [s.strip() for s in f.readlines()]
+    f.close()
+    return names
+
 def clear_screen():
     print "\n"*200
 
@@ -39,11 +45,7 @@ def perform_draw(names, num_winners=1, num_iterations=32, print_multiplier=1):
     raw_input()
 
 if __name__ == '__main__':
-
-    #names = list(string.ascii_lowercase) #["fredrik", "torkil", "torgeir"]
-    f = open("navn.txt", "r")
-    names = [s.strip() for s in f.readlines()]
-    f.close()
+    names = read_file("navn.txt")
 
     num_winners = input("Hvor mange vinnere skal jeg trekke? ")
 
