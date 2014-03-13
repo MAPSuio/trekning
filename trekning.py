@@ -30,7 +30,7 @@ def perform_draw(names, num_winners=1, num_iterations=32, print_multiplier=1):
     
     winners = [names[randint(0, len(names)-1)]*print_multiplier for i in range(num_winners)]
     
-    if num_winners > 0: title = "Vinnerne" 
+    if num_winners > 1: title = "Vinnerne" 
     else: title = "Vinneren"
     
     message = title + " er: " + ", ".join(winners) + ". Gratulerer!"
@@ -40,7 +40,12 @@ def perform_draw(names, num_winners=1, num_iterations=32, print_multiplier=1):
 
 if __name__ == '__main__':
 
-    names = list(string.ascii_lowercase) #["fredrik", "torkil", "torgeir"]
+    #names = list(string.ascii_lowercase) #["fredrik", "torkil", "torgeir"]
+    f = open("navn.txt", "r")
+    names = [s.strip() for s in f.readlines()]
+    f.close()
 
-    perform_draw(names, num_winners=3, print_multiplier=5)
+    num_winners = input("Hvor mange vinnere skal jeg trekke? ")
+
+    perform_draw(names, num_winners=num_winners, print_multiplier=5)
 
